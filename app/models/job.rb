@@ -6,5 +6,5 @@ class Job < ActiveRecord::Base
   attr_accessible :apply_url, :expires_at, :organization_id, :overview, :title, :location, :cause_list, :technology_list
   
   scope :active, where(['expires_at IS NULL OR expires_at > ?', DateTime.now])
-  
+  scope :with_org_name_url, eager_load(:organization).select("jobs.*, organizations.name, organizations.url")
 end

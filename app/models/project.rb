@@ -15,6 +15,7 @@ class Project < ActiveRecord::Base
   scope :approved, where(:is_approved => true)
   scope :active, approved.where(:is_active => true)
   scope :featured, where("organization_id IS NOT NULL").active
+  scope :with_organization_twitter, eager_load(:organization).select("projects.*, organizations.twitter")
   
   def github_display
     github_display = self.organization.github_org + "/" + self.github_repo
