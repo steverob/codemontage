@@ -25,9 +25,11 @@ class Organization < ActiveRecord::Base
   include FriendlyId
   friendly_id :name, use: :slugged
 
-  scope :approved, where(Project.approved.where("organization_id = organizations.id").exists).order("name")
-  scope :featured, approved.where(Project.active.where("organization_id = organizations.id").exists).order("name")
-  scope :hiring, where(Job.where("organization_id = organizations.id").exists).order("name")
+
+  default_scope { order("name") }
+  scope :approved, joins(:projects).where(:projects=>{:is_approved=>true}).uniq
+  scope :featured, approved.joins(:projects).where(:projects=>{:is_active=>true}).uniq
+  scope :hiring, joins(:jobs).uniq
   scope :sponsors, Organization.joins(:sponsorships).order("sponsorships.tier, organizations.name")
 
   def display_url
