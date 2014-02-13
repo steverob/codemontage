@@ -27,6 +27,7 @@ gem 'geocoder'
 gem 'gmaps4rails'
 gem 'paperclip', '~> 3.0'
 gem 'aws-sdk'
+gem 'kaminari'
 
 # Test Suite
 group :development, :test do 

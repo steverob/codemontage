@@ -254,6 +254,7 @@ DEPENDENCIES
   geocoder
   gmaps4rails
   jquery-rails
+  kaminari
   meta_search (>= 1.1.0.pre)
   newrelic_rpm (~> 3.7.1.182)
   omniauth
